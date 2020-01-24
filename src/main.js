@@ -12,7 +12,7 @@ function createWindow() {
   });
 
   window.loadFile('src/index.html');
-  window.webContents.openDevTools();
+  // window.webContents.openDevTools();
   window.on('closed', () => {
     window = null;
   });
@@ -26,6 +26,6 @@ app.on('window-all-closed', () => {
 });
 app.on('activate', () => {
   if (window == null) {
-    createWindow()
+    createWindow();
   }
 });
