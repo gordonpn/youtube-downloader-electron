@@ -32,12 +32,14 @@ Work in progress (WIP) screenshot
 * UIkit CSS framework
 * Electron.js
 * Node.js
+* Python3
 
 ## Getting started
 
 ### For development
 
 * Clone this repo
+* Run `pip3 install -r requirements.txt` in the root directory to install dependencies
 * Run `npm install` in the root directory to install dependencies
 * Run `npm start` to start the development server (Electron)
 
@@ -48,6 +50,7 @@ _To be released_
 ### Prerequisites
 
 * Node.js 12+
+* Python 3+
 
 ### Configuration
 
@@ -55,7 +58,7 @@ _Nothing yet_
 
 ## Roadmap / Todo
 
-* [ ] Implement back-end logic for downloading
+* [x] Implement back-end logic for downloading
 * [ ] Release alpha
 
 ## License

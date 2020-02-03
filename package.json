@@ -27,5 +27,11 @@
     "tabWidth": 2,
     "arrowParens": "always",
     "printWidth": 90
+  },
+  "dependencies": {
+    "python-shell": "^1.0.8"
+  },
+  "repository": {
+    "url": "https://github.com/gpnn/youtube-downloader-electron"
   }
 }
