@@ -32,16 +32,20 @@ Work in progress (WIP) screenshot
 * UIkit CSS framework
 * Electron.js
 * Node.js
-* Python3
 
 ## Getting started
 
 ### For development
 
 * Clone this repo
-* Run `pip3 install -r requirements.txt` in the root directory to install dependencies
 * Run `npm install` in the root directory to install dependencies
 * Run `npm start` to start the development server (Electron)
+
+#### To build / package
+
+* Run `npm pack`
+
+For this step, you will need have NPM and the dependencies installed.
 
 ### For general usage
 
@@ -50,7 +54,9 @@ _To be released_
 ### Prerequisites
 
 * Node.js 12+
-* Python 3+
+* [FFmpeg](https://www.ffmpeg.org/)
+
+This project makes use of FFmpeg to convert to mp3.
 
 ### Configuration
 

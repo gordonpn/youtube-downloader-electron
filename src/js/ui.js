@@ -64,11 +64,12 @@ function buttonClicked(audioOnly) {
     }, 10000);
 
   } else {
-    console.log('Valid link!');
-    console.log(`id: ${match[5]}`);
+    const video_id = match[5];
+    console.log('Valid link.');
+    console.log(`id: ${video_id}`);
     input_element.className = 'uk-form-success uk-input uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
 
-    download(url_link, audioOnly);
+    download(url_link, video_id, audioOnly);
     show_success();
 
     setTimeout(() => {
