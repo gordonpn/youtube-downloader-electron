@@ -43,13 +43,13 @@ Work in progress (WIP) screenshot
 
 #### To build / package
 
-* Run `npm pack`
+* Run `npm run pack`
 
 For this step, you will need have NPM and the dependencies installed.
 
 ### For general usage
 
-_To be released_ 
+Please take a look at the [Releases](https://github.com/gpnn/youtube-downloader-electron/releases/). 
 
 ### Prerequisites
 
@@ -65,7 +65,9 @@ _Nothing yet_
 ## Roadmap / Todo
 
 * [x] Implement back-end logic for downloading
-* [ ] Release alpha
+* [x] Release alpha
+* [ ] Add bulk download functionality
+* [ ] Right click to paste functionality
 
 ## License
 
