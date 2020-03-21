@@ -1,6 +1,10 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 
 let window;
+
+const inputMenu = Menu.buildFromTemplate([
+  { role: 'paste' }
+]);
 
 function createWindow() {
   window = new BrowserWindow({
@@ -12,9 +16,18 @@ function createWindow() {
   });
 
   window.loadFile('src/index.html');
-  // window.webContents.openDevTools();
+  if (process.env.ENV === 'development') {
+    window.webContents.openDevTools();
+  }
   window.on('closed', () => {
     window = null;
+  });
+
+  window.webContents.on('context-menu', (e, props) => {
+    const { isEditable } = props;
+    if (isEditable) {
+      inputMenu.popup(window);
+    }
   });
 }
 
