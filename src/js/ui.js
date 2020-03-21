@@ -1,10 +1,22 @@
 const path = require('path');
 const download = require(path.join(__dirname, 'js/downloader.js'));
 
-document.getElementById('link-input').addEventListener('keydown', event => {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-  }
+document.getElementById('links-area').addEventListener('input', (event) => {
+  const autoExpand = (field) => {
+    field.style.height = 'inherit';
+
+    const computed = window.getComputedStyle(field);
+
+    const height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+      + parseInt(computed.getPropertyValue('padding-top'), 10)
+      + field.scrollHeight
+      + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+      + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+    field.style.height = height + 'px';
+  };
+
+  autoExpand(event.target);
 });
 
 function buttonClicked(audioOnly) {
