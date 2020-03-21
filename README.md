@@ -68,6 +68,8 @@ _Nothing yet_
 * [x] Release alpha
 * [ ] Add bulk download functionality
 * [ ] Right click to paste functionality
+* [ ] Button to open folder with downloaded content
+* [ ] Separate downloaded content from Electron files
 
 ## License
 
