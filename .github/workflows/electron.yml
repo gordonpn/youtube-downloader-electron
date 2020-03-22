@@ -44,7 +44,7 @@ jobs:
           mkdir artifacts
           mv dist/*.exe artifacts
       - name: Cleanup artifacts Ubuntu
-        if: matrix.os == 'macOS-latest'
+        if: matrix.os == 'ubuntu-latest'
         run: |
           mkdir artifacts
           mv dist/*.snap artifacts || true
