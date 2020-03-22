@@ -2,8 +2,8 @@ name: Electron CD
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -32,16 +32,23 @@ jobs:
       - name: Publish
         run: |
           npm run dist
-      - name: Cleanup artifacts
-        if: matrix.os != 'windows-latest'
+      - name: Cleanup artifacts Mac
+        if: matrix.os == 'macOS-latest'
         run: |
           mkdir artifacts
-          mv "dist/(*.exe,*.deb,*.AppImage,*.dmg)" artifacts || true
-      - name: Cleanup artifacts Win
+          mv dist/*.dmg artifacts || true
+          mv dist/*.zip artifacts || true
+      - name: Cleanup artifacts Windows
         if: matrix.os == 'windows-latest'
         run: |
           mkdir artifacts
           mv dist/*.exe artifacts
+      - name: Cleanup artifacts Ubuntu
+        if: matrix.os == 'macOS-latest'
+        run: |
+          mkdir artifacts
+          mv dist/*.snap artifacts || true
+          mv dist/*.AppImage artifacts || true
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
@@ -49,7 +56,6 @@ jobs:
           path: artifacts
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: "artifacts/**"
         env:
