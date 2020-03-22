@@ -25,7 +25,7 @@ Download YouTube videos as mp3 or mp4, hassle-free. With a an easy-to-use and en
 
 Work in progress (WIP) screenshot
 
-![Screenshot](https://github.com/gpnn/youtube-downloader-electron/blob/master/doc/Screen%20Shot%202020-01-29%20at%209.21.20%20PM.png?raw=true)
+![Screenshot](./doc/Screen Shot 2020-01-29 at 9.21.20 PM.png)
 
 ## Built with / technologies
 
