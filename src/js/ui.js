@@ -6,6 +6,8 @@ const { downloadAudio, downloadVideo, openFolder } = require(path.join(__dirname
 const linksTextArea = document.getElementById('links-textarea');
 let updatesElement = document.getElementById('updates');
 const mainCard = document.getElementById('main-card');
+const videoDownloadButton = document.getElementById('video-download');
+const audioDownloadButton = document.getElementById('audio-download');
 
 const showMessage = (response) => {
   let alertType;
@@ -31,6 +33,8 @@ const showMessage = (response) => {
     linksTextArea.removeAttribute('uk-tooltip');
     linksTextArea.className = 'uk-textarea uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
     linksTextArea.value = '';
+    videoDownloadButton.setAttribute('disabled', '');
+    audioDownloadButton.setAttribute('disabled', '');
     UIkit.alert(updatesElement).close();
     const footer = document.createElement('div');
     footer.id = 'updates';
@@ -64,6 +68,14 @@ const processLinks = (audioOnly) => {
 };
 
 linksTextArea.addEventListener('input', (event) => {
+  if (linksTextArea.value.length > 0) {
+    videoDownloadButton.removeAttribute('disabled');
+    audioDownloadButton.removeAttribute('disabled');
+  } else {
+    videoDownloadButton.setAttribute('disabled', '');
+    audioDownloadButton.setAttribute('disabled', '');
+  }
+
   const autoExpand = (field) => {
     field.style.height = 'inherit';
 
@@ -81,11 +93,11 @@ linksTextArea.addEventListener('input', (event) => {
   autoExpand(event.target);
 });
 
-document.getElementById('video-download').addEventListener('click', () => {
+videoDownloadButton.addEventListener('click', () => {
   processLinks(false);
 });
 
-document.getElementById('audio-download').addEventListener('click', () => {
+audioDownloadButton.addEventListener('click', () => {
   processLinks(true);
 });
 
