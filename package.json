@@ -5,7 +5,8 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "electron-packager . YoutubeDownloader"
+    "pack": "electron-packager . YoutubeDownloader",
+    "test": "jest"
   },
   "author": "Gordon Pham-Nguyen",
   "license": "MIT",

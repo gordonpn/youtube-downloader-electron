@@ -1,11 +1,21 @@
 const fs = require('fs');
+const path = require('path');
 const youtubeDownloader = require('ytdl-core');
 const youtubeDownloaderMp3 = require('youtube-mp3-downloader');
+const downloadDir = './Download';
+
+const createDownloadDir = () => {
+  if (!fs.existsSync(downloadDir)) {
+    fs.mkdirSync(downloadDir);
+  }
+};
 
 const downloadAudio = (video_id) => {
+  createDownloadDir();
+
   return new Promise((resolve, reject) => {
     const youtube = new youtubeDownloaderMp3({
-      'outputPath': '.',
+      'outputPath': downloadDir,
       'youtubeVideoQuality': 'highest',
       'queueParallelism': 2,
       'progressTimeout': 2000
@@ -23,6 +33,8 @@ const downloadAudio = (video_id) => {
 };
 
 const downloadVideo = (url) => {
+  createDownloadDir();
+
   return new Promise((resolve, reject) => {
     const metadata = youtubeDownloader.getInfo(url);
 
@@ -42,7 +54,7 @@ const downloadVideo = (url) => {
         resolve({message: `${title} finished downloading with success`});
       });
 
-      youtube.pipe(fs.createWriteStream(`${title}.mp4`));
+      youtube.pipe(fs.createWriteStream(path.join(downloadDir, `${title}.mp4`)));
 
     });
   })
