@@ -7,24 +7,6 @@ const linksTextArea = document.getElementById('links-textarea');
 let updatesElement = document.getElementById('updates');
 const mainCard = document.getElementById('main-card');
 
-linksTextArea.addEventListener('input', (event) => {
-  const autoExpand = (field) => {
-    field.style.height = 'inherit';
-
-    const computed = window.getComputedStyle(field);
-
-    const height = parseInt(computed.getPropertyValue('border-top-width'), 10)
-      + parseInt(computed.getPropertyValue('padding-top'), 10)
-      + field.scrollHeight
-      + parseInt(computed.getPropertyValue('padding-bottom'), 10)
-      + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
-
-    field.style.height = height + 'px';
-  };
-
-  autoExpand(event.target);
-});
-
 const showMessage = (response) => {
   let alertType;
   if (response.includes('not valid')) {
@@ -80,6 +62,24 @@ const processLinks = (audioOnly) => {
       });
   });
 };
+
+linksTextArea.addEventListener('input', (event) => {
+  const autoExpand = (field) => {
+    field.style.height = 'inherit';
+
+    const computed = window.getComputedStyle(field);
+
+    const height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+      + parseInt(computed.getPropertyValue('padding-top'), 10)
+      + field.scrollHeight
+      + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+      + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+    field.style.height = height + 'px';
+  };
+
+  autoExpand(event.target);
+});
 
 document.getElementById('video-download').addEventListener('click', () => {
   processLinks(false);
