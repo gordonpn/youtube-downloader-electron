@@ -1,17 +1,20 @@
 {
   "name": "youtube-downloader",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "YouTube downloader cross-platform desktop app built with Electron.js",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "electron-packager . YoutubeDownloader",
-    "test": "jest"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "test": "jest",
+    "postinstall": "electron-builder install-app-deps"
   },
   "author": "Gordon Pham-Nguyen",
   "license": "MIT",
   "devDependencies": {
     "electron": "^7.1.10",
+    "electron-builder": "^22.4.1",
     "electron-packager": "^14.2.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
@@ -39,5 +42,21 @@
   },
   "repository": {
     "url": "https://github.com/gpnn/youtube-downloader-electron"
+  },
+  "build": {
+    "appId": "com.gpnn.youtube-downloader",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
   }
 }
