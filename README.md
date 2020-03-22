@@ -58,18 +58,14 @@ Please take a look at the [Releases](https://github.com/gpnn/youtube-downloader-
 
 This project makes use of FFmpeg to convert to mp3.
 
-### Configuration
-
-_Nothing yet_
-
 ## Roadmap / Todo
 
 * [x] Implement back-end logic for downloading
 * [x] Release alpha
-* [ ] Add bulk download functionality
-* [ ] Right click to paste functionality
-* [ ] Button to open folder with downloaded content
-* [ ] Separate downloaded content from Electron files
+* [x] Add bulk download functionality
+* [x] Right click to paste functionality
+* [x] Button to open folder with downloaded content
+* [x] Separate downloaded content from Electron files
 
 ## License
 
