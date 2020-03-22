@@ -1,6 +1,6 @@
 {
   "name": "youtube-downloader",
-  "version": "0.2.0",
+  "version": "0.2.4",
   "description": "YouTube downloader cross-platform desktop app built with Electron.js",
   "main": "src/main.js",
   "scripts": {
