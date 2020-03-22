@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const openExplorer = require('open-file-explorer');
 const youtubeDownloader = require('ytdl-core');
 const youtubeDownloaderMp3 = require('youtube-mp3-downloader');
 const downloadDir = './Download';
@@ -61,5 +62,10 @@ const downloadVideo = (url) => {
 
 };
 
+const openFolder = () => {
+  openExplorer(downloadDir, () => {});
+};
+
 module.exports.downloadAudio = downloadAudio;
 module.exports.downloadVideo = downloadVideo;
+module.exports.openFolder = openFolder;

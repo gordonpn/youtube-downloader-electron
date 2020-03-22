@@ -33,6 +33,7 @@
     "printWidth": 90
   },
   "dependencies": {
+    "open-file-explorer": "^1.0.2",
     "youtube-mp3-downloader": "^0.6.5",
     "ytdl-core": "^1.0.9"
   },
