@@ -47,11 +47,11 @@ const downloadVideo = (url) => {
         filter: format => format.container === 'mp4'
       });
 
-      youtube.on('error', (event) =>{
+      youtube.on('error', () =>{
         reject({message:`There was an error while downloading ${title}`})
       });
 
-      youtube.on('end', (event) => {
+      youtube.on('end', () => {
         resolve({message: `${title} finished downloading with success`});
       });
 
