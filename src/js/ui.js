@@ -1,7 +1,13 @@
 const path = require('path');
-const download = require(path.join(__dirname, 'js/downloader.js'));
 
-document.getElementById('links-area').addEventListener('input', (event) => {
+const { validateLinks } = require(path.join(__dirname, 'js/validate.js'));
+const { downloadAudio, downloadVideo } = require(path.join(__dirname, 'js/downloader.js'));
+
+const linksTextArea = document.getElementById('links-textarea');
+let updatesElement = document.getElementById('updates');
+const mainCard = document.getElementById('main-card');
+
+linksTextArea.addEventListener('input', (event) => {
   const autoExpand = (field) => {
     field.style.height = 'inherit';
 
@@ -19,74 +25,66 @@ document.getElementById('links-area').addEventListener('input', (event) => {
   autoExpand(event.target);
 });
 
-function buttonClicked(audioOnly) {
-  const re = new RegExp('^((?:https?:)?\\/\\/)?((?:www|m)\\.)?((?:youtube\\.com|youtu.be))(\\/(?:[\\w\\-]+\\?v=|embed\\/|v\\/)?)([\\w\\-]+)(\\S+)?$');
-  const url_link = document.getElementById('link-input').value;
-  const input_element = document.getElementById('link-input');
-  const updates_element = document.getElementById('updates');
-  console.log(url_link);
-
-  const match = re.exec(url_link);
-
-  function show_error() {
-    const error_alert = document.createElement('div');
-    error_alert.className = 'uk-alert-danger';
-    const para = document.createElement('p');
-    para.textContent = 'Link is not valid';
-    const close_button = document.createElement('a');
-    close_button.className = 'uk-alert-close';
-    close_button.setAttribute('uk-close', '');
-    error_alert.appendChild(close_button);
-    error_alert.appendChild(para);
-    updates_element.appendChild(error_alert);
-
-    setTimeout(() => {
-      UIkit.alert(error_alert).close();
-    }, 10000);
-  }
-
-  function show_success() {
-    const success_alert = document.createElement('div');
-    success_alert.className = 'uk-alert-success';
-    const para = document.createElement('p');
-    para.textContent = 'Downloading!';
-    const close_button = document.createElement('a');
-    close_button.className = 'uk-alert-close';
-    close_button.setAttribute('uk-close', '');
-    success_alert.appendChild(close_button);
-    success_alert.appendChild(para);
-    updates_element.appendChild(success_alert);
-
-    setTimeout(() => {
-      UIkit.alert(success_alert).close();
-    }, 10000);
-  }
-
-  if (!match) {
-    console.log('Not valid link.');
-    input_element.className = 'uk-form-danger uk-input uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
-    input_element.setAttribute('uk-tooltip', 'title: This link is not valid.; pos: right');
-
-    show_error();
-
-    setTimeout(() => {
-      input_element.removeAttribute('uk-tooltip');
-      input_element.className = 'uk-input uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
-      input_element.value = '';
-    }, 10000);
-
+const showMessage = (response) => {
+  let alertType;
+  if (response.includes('not valid')) {
+    alertType = 'uk-alert-danger';
+    linksTextArea.className = 'uk-textarea uk-form-danger uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
+    linksTextArea.setAttribute('uk-tooltip', 'title: One of these links is not valid.; pos: right');
+  } else if (response.includes('success')) {
+    alertType = 'uk-alert-primary';
+  } else if (response.includes('error')) {
+    alertType = 'uk-alert-warning';
   } else {
-    const video_id = match[5];
-    console.log('Valid link.');
-    console.log(`id: ${video_id}`);
-    input_element.className = 'uk-form-success uk-input uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
-
-    download(url_link, video_id, audioOnly);
-    show_success();
-
-    setTimeout(() => {
-      input_element.className = 'uk-input uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
-      input_element.value = '';
-    }, 10000);
+    alertType = 'uk-alert-success';
+    linksTextArea.className = 'uk-textarea uk-form-success uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
   }
-}
+  updatesElement.className = alertType;
+  const para = document.createElement('p');
+  para.textContent = response;
+  para.className = 'uk-text-large uk-text-normal uk-text-center';
+  updatesElement.appendChild(para);
+
+  setTimeout(() => {
+    linksTextArea.removeAttribute('uk-tooltip');
+    linksTextArea.className = 'uk-textarea uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
+    linksTextArea.value = '';
+    UIkit.alert(updatesElement).close();
+    const footer = document.createElement('div');
+    footer.id = 'updates';
+    footer.setAttribute('uk-alert', '');
+    mainCard.appendChild(footer);
+    updatesElement = footer;
+  }, 10000);
+};
+
+const processLinks = (audioOnly) => {
+  const links = linksTextArea.value;
+  const linksArray = links.split('\n');
+  linksArray.forEach(link => {
+    validateLinks(link)
+      .then(value => {
+        showMessage(value.message);
+        if (audioOnly) {
+          downloadAudio(value.id)
+            .then(response => showMessage(response.message))
+            .catch(reason => showMessage(reason.message));
+        } else {
+          downloadVideo(value.link)
+            .then(response => showMessage(response.message))
+            .catch(reason => showMessage(reason.message));
+        }
+      })
+      .catch(reason => {
+        showMessage(reason.message);
+      });
+  });
+};
+
+document.getElementById('video-download').addEventListener('click', () => {
+  processLinks(false);
+});
+
+document.getElementById('audio-download').addEventListener('click', () => {
+  processLinks(true);
+});
