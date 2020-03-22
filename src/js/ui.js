@@ -1,7 +1,7 @@
 const path = require('path');
 
 const { validateLinks } = require(path.join(__dirname, 'js/validate.js'));
-const { downloadAudio, downloadVideo } = require(path.join(__dirname, 'js/downloader.js'));
+const { downloadAudio, downloadVideo, openFolder } = require(path.join(__dirname, 'js/downloader.js'));
 
 const linksTextArea = document.getElementById('links-textarea');
 let updatesElement = document.getElementById('updates');
@@ -87,4 +87,8 @@ document.getElementById('video-download').addEventListener('click', () => {
 
 document.getElementById('audio-download').addEventListener('click', () => {
   processLinks(true);
+});
+
+document.getElementById('open-folder').addEventListener('click', () => {
+  openFolder();
 });
