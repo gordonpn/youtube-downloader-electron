@@ -25,7 +25,7 @@ Download YouTube videos as mp3 or mp4, hassle-free. With a an easy-to-use and en
 
 Work in progress (WIP) screenshot
 
-![Screenshot](./doc/Screen Shot 2020-01-29 at 9.21.20 PM.png)
+![Screenshot](./doc/Screen Recording 2020-03-22 at 12.48.09 PM.mov.gif?raw=true)
 
 ## Built with / technologies
 
