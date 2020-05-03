@@ -8,7 +8,7 @@ const validateLinks = link => {
       const response = {
         message: `${link} is valid`,
         link,
-        id: match[5]
+        id: match[5],
       };
       resolve(response);
     } else {

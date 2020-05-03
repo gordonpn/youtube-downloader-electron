@@ -13,9 +13,12 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,
   },
   rules: {
+    "import/no-dynamic-require": 0,
+    "no-param-reassign": 0
   },
 };

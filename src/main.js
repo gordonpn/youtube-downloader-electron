@@ -9,8 +9,8 @@ function createWindow() {
     width: 1280,
     height: 720,
     webPreferences: {
-      nodeIntegration: true
-    }
+      nodeIntegration: true,
+    },
   });
 
   window.loadFile('src/index.html');

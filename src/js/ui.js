@@ -41,6 +41,7 @@ const showMessage = response => {
   updatesElement.appendChild(para);
 
   setTimeout(() => {
+    // eslint-disable-next-line no-undef
     UIkit.alert(updatesElement).close();
     const footer = document.createElement('div');
     footer.id = 'updates';

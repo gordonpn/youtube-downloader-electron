@@ -22,13 +22,13 @@ const download = (url, audioOnly) => {
     extension = '.mp3';
     options = {
       quality: 'highestaudio',
-      filter: 'audioonly'
+      filter: 'audioonly',
     };
   } else {
     extension = '.mp4';
     options = {
       quality: 'highest',
-      filter: format => format.container === 'mp4'
+      filter: format => format.container === 'mp4',
     };
   }
 
@@ -52,7 +52,7 @@ const download = (url, audioOnly) => {
       });
 
       youtube.on('error', () => {
-        reject({ message: `There was an error while downloading ${title}` });
+        reject(new Error(`There was an error while downloading ${title}`));
       });
 
       youtube.on('end', () => {

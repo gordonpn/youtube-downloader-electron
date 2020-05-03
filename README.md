@@ -18,11 +18,9 @@ Download the [latest release for your platform](https://github.com/gordonpn/yout
 
 ## Motivation
 
-This project started from my parents asking me how to download YouTube videos or music from YouTube.
+This project started by my parents asking me how to download YouTube videos or music from YouTube.
 
 The problem is that I didn't want to send my parents to a suspicious online tool filled with ads.
-
-At first, I made them a Python commandline app to download, but that was too verbose.
 
 Then, I had the idea to have a try at developing a clean and straightforward UI as a desktop app for them to use.
 
