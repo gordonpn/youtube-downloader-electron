@@ -1,4 +1,5 @@
 const path = require('path');
+const clipboardy = require('clipboardy');
 
 const { validateLinks } = require(path.join(__dirname, 'js/validate.js'));
 const { download, openFolder, setSaveFolder } = require(path.join(
@@ -11,6 +12,7 @@ let updatesElement = document.getElementById('updates');
 const mainCard = document.getElementById('main-card');
 const videoDownloadButton = document.getElementById('video-download');
 const audioDownloadButton = document.getElementById('audio-download');
+const pasteLinkButton = document.getElementById('paste-link');
 const clearInputButton = document.getElementById('clear-input');
 
 const showMessage = response => {
@@ -65,6 +67,21 @@ const processLinks = audioOnly => {
   });
 };
 
+const autoExpand = field => {
+  field.style.height = 'inherit';
+
+  const computed = window.getComputedStyle(field);
+
+  const height =
+    parseInt(computed.getPropertyValue('border-top-width'), 10) +
+    parseInt(computed.getPropertyValue('padding-top'), 10) +
+    field.scrollHeight +
+    parseInt(computed.getPropertyValue('padding-bottom'), 10) +
+    parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+  field.style.height = `${height}px`;
+};
+
 linksTextArea.addEventListener('input', event => {
   if (linksTextArea.value.length > 0) {
     videoDownloadButton.removeAttribute('disabled');
@@ -75,22 +92,6 @@ linksTextArea.addEventListener('input', event => {
     audioDownloadButton.setAttribute('disabled', '');
     clearInputButton.setAttribute('disabled', '');
   }
-
-  const autoExpand = field => {
-    field.style.height = 'inherit';
-
-    const computed = window.getComputedStyle(field);
-
-    const height =
-      parseInt(computed.getPropertyValue('border-top-width'), 10) +
-      parseInt(computed.getPropertyValue('padding-top'), 10) +
-      field.scrollHeight +
-      parseInt(computed.getPropertyValue('padding-bottom'), 10) +
-      parseInt(computed.getPropertyValue('border-bottom-width'), 10);
-
-    field.style.height = `${height}px`;
-  };
-
   autoExpand(event.target);
 });
 
@@ -100,6 +101,17 @@ videoDownloadButton.addEventListener('click', () => {
 
 audioDownloadButton.addEventListener('click', () => {
   processLinks(true);
+});
+
+pasteLinkButton.addEventListener('click', () => {
+  clipboardy.read().then(result => {
+    if (linksTextArea.value.length > 0) {
+      linksTextArea.textContent += `\n${result}`;
+    } else {
+      linksTextArea.textContent = result;
+    }
+    linksTextArea.dispatchEvent(new Event('input', { bubbles: true }));
+  });
 });
 
 clearInputButton.addEventListener('click', () => {
