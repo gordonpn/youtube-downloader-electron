@@ -11,6 +11,7 @@ let updatesElement = document.getElementById('updates');
 const mainCard = document.getElementById('main-card');
 const videoDownloadButton = document.getElementById('video-download');
 const audioDownloadButton = document.getElementById('audio-download');
+const clearInputButton = document.getElementById('clear-input');
 
 const showMessage = response => {
   let alertType;
@@ -34,16 +35,10 @@ const showMessage = response => {
   updatesElement.className = alertType;
   const para = document.createElement('p');
   para.textContent = response;
-  para.className = 'uk-text-large uk-text-normal uk-text-center';
+  para.className = 'uk-text-normal uk-text-center';
   updatesElement.appendChild(para);
 
   setTimeout(() => {
-    linksTextArea.removeAttribute('uk-tooltip');
-    linksTextArea.className =
-      'uk-textarea uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
-    linksTextArea.value = '';
-    videoDownloadButton.setAttribute('disabled', '');
-    audioDownloadButton.setAttribute('disabled', '');
     UIkit.alert(updatesElement).close();
     const footer = document.createElement('div');
     footer.id = 'updates';
@@ -74,9 +69,11 @@ linksTextArea.addEventListener('input', event => {
   if (linksTextArea.value.length > 0) {
     videoDownloadButton.removeAttribute('disabled');
     audioDownloadButton.removeAttribute('disabled');
+    clearInputButton.removeAttribute('disabled');
   } else {
     videoDownloadButton.setAttribute('disabled', '');
     audioDownloadButton.setAttribute('disabled', '');
+    clearInputButton.setAttribute('disabled', '');
   }
 
   const autoExpand = field => {
@@ -103,6 +100,15 @@ videoDownloadButton.addEventListener('click', () => {
 
 audioDownloadButton.addEventListener('click', () => {
   processLinks(true);
+});
+
+clearInputButton.addEventListener('click', () => {
+  linksTextArea.removeAttribute('uk-tooltip');
+  linksTextArea.className =
+    'uk-textarea uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
+  linksTextArea.value = '';
+  videoDownloadButton.setAttribute('disabled', '');
+  audioDownloadButton.setAttribute('disabled', '');
 });
 
 document.getElementById('open-folder').addEventListener('click', () => {
