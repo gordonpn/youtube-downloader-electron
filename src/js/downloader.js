@@ -2,8 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const openExplorer = require('open-file-explorer');
 const youtubeDownloader = require('ytdl-core');
+const { dialog } = require('electron').remote;
 
-const downloadDir = './Download';
+let downloadDir = './Download';
 
 const createDownloadDir = () => {
   if (!fs.existsSync(downloadDir)) {
@@ -55,5 +56,16 @@ const openFolder = () => {
   openExplorer(downloadDir, () => {});
 };
 
+const setSaveFolder = () => {
+  dialog
+    .showOpenDialog({ properties: ['openDirectory', 'createDirectory'] })
+    .then(result => {
+      if (!result.canceled) {
+        [downloadDir] = result.filePaths;
+      }
+    });
+};
+
 module.exports.download = download;
 module.exports.openFolder = openFolder;
+module.exports.setSaveFolder = setSaveFolder;

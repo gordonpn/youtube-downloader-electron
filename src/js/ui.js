@@ -1,7 +1,10 @@
 const path = require('path');
 
 const { validateLinks } = require(path.join(__dirname, 'js/validate.js'));
-const { download, openFolder } = require(path.join(__dirname, 'js/downloader.js'));
+const { download, openFolder, setSaveFolder } = require(path.join(
+  __dirname,
+  'js/downloader.js'
+));
 
 const linksTextArea = document.getElementById('links-textarea');
 let updatesElement = document.getElementById('updates');
@@ -104,4 +107,8 @@ audioDownloadButton.addEventListener('click', () => {
 
 document.getElementById('open-folder').addEventListener('click', () => {
   openFolder();
+});
+
+document.getElementById('save-folder').addEventListener('click', () => {
+  setSaveFolder();
 });
