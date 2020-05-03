@@ -1,11 +1,13 @@
-const validateLinks = (link) => {
+const validateLinks = link => {
   return new Promise((resolve, reject) => {
-    const re = new RegExp('^((?:https?:)?\\/\\/)?((?:www|m)\\.)?((?:youtube\\.com|youtu.be))(\\/(?:[\\w\\-]+\\?v=|embed\\/|v\\/)?)([\\w\\-]+)(\\S+)?$');
+    const re = new RegExp(
+      '^((?:https?:)?\\/\\/)?((?:www|m)\\.)?((?:youtube\\.com|youtu.be))(\\/(?:[\\w\\-]+\\?v=|embed\\/|v\\/)?)([\\w\\-]+)(\\S+)?$'
+    );
     const match = re.exec(link);
     if (match) {
       const response = {
         message: `${link} is valid`,
-        link: link,
+        link,
         id: match[5]
       };
       resolve(response);

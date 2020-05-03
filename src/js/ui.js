@@ -1,7 +1,10 @@
 const path = require('path');
 
 const { validateLinks } = require(path.join(__dirname, 'js/validate.js'));
-const { downloadAudio, downloadVideo, openFolder } = require(path.join(__dirname, 'js/downloader.js'));
+const { downloadAudio, downloadVideo, openFolder } = require(path.join(
+  __dirname,
+  'js/downloader.js'
+));
 
 const linksTextArea = document.getElementById('links-textarea');
 let updatesElement = document.getElementById('updates');
@@ -9,19 +12,24 @@ const mainCard = document.getElementById('main-card');
 const videoDownloadButton = document.getElementById('video-download');
 const audioDownloadButton = document.getElementById('audio-download');
 
-const showMessage = (response) => {
+const showMessage = response => {
   let alertType;
   if (response.includes('not valid')) {
     alertType = 'uk-alert-danger';
-    linksTextArea.className = 'uk-textarea uk-form-danger uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
-    linksTextArea.setAttribute('uk-tooltip', 'title: One of these links is not valid.; pos: right');
+    linksTextArea.className =
+      'uk-textarea uk-form-danger uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
+    linksTextArea.setAttribute(
+      'uk-tooltip',
+      'title: One of these links is not valid.; pos: right'
+    );
   } else if (response.includes('success')) {
     alertType = 'uk-alert-primary';
   } else if (response.includes('error')) {
     alertType = 'uk-alert-warning';
   } else {
     alertType = 'uk-alert-success';
-    linksTextArea.className = 'uk-textarea uk-form-success uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
+    linksTextArea.className =
+      'uk-textarea uk-form-success uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
   }
   updatesElement.className = alertType;
   const para = document.createElement('p');
@@ -31,7 +39,8 @@ const showMessage = (response) => {
 
   setTimeout(() => {
     linksTextArea.removeAttribute('uk-tooltip');
-    linksTextArea.className = 'uk-textarea uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
+    linksTextArea.className =
+      'uk-textarea uk-form-width-medium uk-form-large uk-width-1-2 uk-align-center';
     linksTextArea.value = '';
     videoDownloadButton.setAttribute('disabled', '');
     audioDownloadButton.setAttribute('disabled', '');
@@ -44,7 +53,7 @@ const showMessage = (response) => {
   }, 10000);
 };
 
-const processLinks = (audioOnly) => {
+const processLinks = audioOnly => {
   const links = linksTextArea.value;
   const linksArray = links.split('\n');
   linksArray.forEach(link => {
@@ -67,7 +76,7 @@ const processLinks = (audioOnly) => {
   });
 };
 
-linksTextArea.addEventListener('input', (event) => {
+linksTextArea.addEventListener('input', event => {
   if (linksTextArea.value.length > 0) {
     videoDownloadButton.removeAttribute('disabled');
     audioDownloadButton.removeAttribute('disabled');
@@ -76,18 +85,19 @@ linksTextArea.addEventListener('input', (event) => {
     audioDownloadButton.setAttribute('disabled', '');
   }
 
-  const autoExpand = (field) => {
+  const autoExpand = field => {
     field.style.height = 'inherit';
 
     const computed = window.getComputedStyle(field);
 
-    const height = parseInt(computed.getPropertyValue('border-top-width'), 10)
-      + parseInt(computed.getPropertyValue('padding-top'), 10)
-      + field.scrollHeight
-      + parseInt(computed.getPropertyValue('padding-bottom'), 10)
-      + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+    const height =
+      parseInt(computed.getPropertyValue('border-top-width'), 10) +
+      parseInt(computed.getPropertyValue('padding-top'), 10) +
+      field.scrollHeight +
+      parseInt(computed.getPropertyValue('padding-bottom'), 10) +
+      parseInt(computed.getPropertyValue('border-bottom-width'), 10);
 
-    field.style.height = height + 'px';
+    field.style.height = `${height}px`;
   };
 
   autoExpand(event.target);

@@ -2,9 +2,7 @@ const { app, BrowserWindow, Menu } = require('electron');
 
 let window;
 
-const inputMenu = Menu.buildFromTemplate([
-  { role: 'paste' }
-]);
+const inputMenu = Menu.buildFromTemplate([{ role: 'paste' }]);
 
 function createWindow() {
   window = new BrowserWindow({
