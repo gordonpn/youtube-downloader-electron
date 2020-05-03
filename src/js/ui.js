@@ -1,10 +1,7 @@
 const path = require('path');
 
 const { validateLinks } = require(path.join(__dirname, 'js/validate.js'));
-const { downloadAudio, downloadVideo, openFolder } = require(path.join(
-  __dirname,
-  'js/downloader.js'
-));
+const { download, openFolder } = require(path.join(__dirname, 'js/downloader.js'));
 
 const linksTextArea = document.getElementById('links-textarea');
 let updatesElement = document.getElementById('updates');
@@ -60,15 +57,9 @@ const processLinks = audioOnly => {
     validateLinks(link)
       .then(value => {
         showMessage(value.message);
-        if (audioOnly) {
-          downloadAudio(value.id)
-            .then(response => showMessage(response.message))
-            .catch(reason => showMessage(reason.message));
-        } else {
-          downloadVideo(value.link)
-            .then(response => showMessage(response.message))
-            .catch(reason => showMessage(reason.message));
-        }
+        download(value.link, audioOnly)
+          .then(response => showMessage(response.message))
+          .catch(reason => showMessage(reason.message));
       })
       .catch(reason => {
         showMessage(reason.message);
