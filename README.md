@@ -1,19 +1,16 @@
 # YouTube Downloader
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/gpnn/youtube-downloader-electron?style=flat-square)
-![GitHub](https://img.shields.io/github/license/gpnn/youtube-downloader-electron?style=flat-square)
-
-![GitHub top language](https://img.shields.io/github/languages/top/gpnn/youtube-downloader-electron?style=flat-square)
-![GitHub language count](https://img.shields.io/github/languages/count/gpnn/youtube-downloader-electron?style=flat-square)
-
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/gpnn/youtube-downloader-electron?style=flat-square)
-![GitHub last commit](https://img.shields.io/github/last-commit/gpnn/youtube-downloader-electron?style=flat-square)
+![Github release](https://badgen.net/github/release/gordonpn/youtube-downloader-electron)
+![Github license](https://badgen.net/github/license/gordonpn/youtube-downloader-electron)
+![Electron CD](https://github.com/gordonpn/youtube-downloader-electron/workflows/Electron%20CD/badge.svg)
+![Github last commit on develop](https://badgen.net/github/last-commit/gordonpn/youtube-downloader-electron/develop)
+![Github open issues](https://badgen.net/github/open-issues/gordonpn/youtube-downloader-electron)
 
 ---
 
 ## Download
 
-Download the [latest release for your platform](https://github.com/gpnn/youtube-downloader-electron/releases/latest).
+Download the [latest release for your platform](https://github.com/gordonpn/youtube-downloader-electron/releases/latest).
 
 ## Demo GIF
 
@@ -65,4 +62,4 @@ This project makes use of FFmpeg to convert to mp3.
 
 ## License
 
-[MIT License](https://choosealicense.com/licenses/mit/#)
+[MIT License](./LICENSE)
