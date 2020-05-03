@@ -3,6 +3,7 @@ const path = require('path');
 const openExplorer = require('open-file-explorer');
 const youtubeDownloader = require('ytdl-core');
 const { dialog } = require('electron').remote;
+const ProgressBar = require('progressbar.js/dist/progressbar');
 
 let downloadDir = './Download';
 
@@ -38,6 +39,17 @@ const download = (url, audioOnly) => {
       const { title } = value;
 
       const youtube = youtubeDownloader.downloadFromInfo(value, options);
+      const line = new ProgressBar.Line('#progress-bars');
+
+      youtube.on('response', response => {
+        const totalSize = response.headers['content-length'];
+        let dataRead = 0;
+        response.on('data', data => {
+          dataRead += data.length;
+          const percent = dataRead / totalSize;
+          line.animate(percent, { easing: 'easeInOut' });
+        });
+      });
 
       youtube.on('error', () => {
         reject({ message: `There was an error while downloading ${title}` });
@@ -45,6 +57,7 @@ const download = (url, audioOnly) => {
 
       youtube.on('end', () => {
         resolve({ message: `${title} finished downloading with success` });
+        line.destroy();
       });
 
       youtube.pipe(fs.createWriteStream(path.join(downloadDir, `${title}${extension}`)));
