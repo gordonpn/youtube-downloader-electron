@@ -1,8 +1,8 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu } = require("electron");
 
 let window;
 
-const inputMenu = Menu.buildFromTemplate([{ role: 'paste' }]);
+const inputMenu = Menu.buildFromTemplate([{ role: "paste" }]);
 
 function createWindow() {
   window = new BrowserWindow({
@@ -10,18 +10,19 @@ function createWindow() {
     height: 720,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
   });
 
-  window.loadFile('src/index.html');
-  if (process.env.ENV === 'development') {
+  window.loadFile("src/index.html");
+  if (process.env.ENV === "development") {
     window.webContents.openDevTools();
   }
-  window.on('closed', () => {
+  window.on("closed", () => {
     window = null;
   });
 
-  window.webContents.on('context-menu', (e, props) => {
+  window.webContents.on("context-menu", (e, props) => {
     const { isEditable } = props;
     if (isEditable) {
       inputMenu.popup(window);
@@ -29,13 +30,13 @@ function createWindow() {
   });
 }
 
-app.on('ready', createWindow);
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+app.on("ready", createWindow);
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });
-app.on('activate', () => {
+app.on("activate", () => {
   if (window == null) {
     createWindow();
   }

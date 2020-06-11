@@ -1,11 +1,11 @@
-const fs = require('fs');
-const path = require('path');
-const openExplorer = require('open-file-explorer');
-const youtubeDownloader = require('ytdl-core');
-const { dialog } = require('electron').remote;
-const ProgressBar = require('progressbar.js/dist/progressbar');
+const fs = require("fs");
+const path = require("path");
+const openExplorer = require("open-file-explorer");
+const youtubeDownloader = require("ytdl-core");
+const { dialog } = require("electron").remote;
+const ProgressBar = require("progressbar.js/dist/progressbar");
 
-let downloadDir = './Download';
+let downloadDir = "./Download";
 
 const createDownloadDir = () => {
   if (!fs.existsSync(downloadDir)) {
@@ -19,48 +19,50 @@ const download = (url, audioOnly) => {
   let options;
 
   if (audioOnly) {
-    extension = '.mp3';
+    extension = ".mp3";
     options = {
-      quality: 'highestaudio',
-      filter: 'audioonly',
+      quality: "highestaudio",
+      filter: "audioonly",
     };
   } else {
-    extension = '.mp4';
+    extension = ".mp4";
     options = {
-      quality: 'highest',
-      filter: format => format.container === 'mp4',
+      quality: "highest",
+      filter: (format) => format.container === "mp4",
     };
   }
 
   return new Promise((resolve, reject) => {
     const metadata = youtubeDownloader.getInfo(url);
 
-    metadata.then(value => {
+    metadata.then((value) => {
       const { title } = value;
 
       const youtube = youtubeDownloader.downloadFromInfo(value, options);
-      const line = new ProgressBar.Line('#progress-bars');
+      const line = new ProgressBar.Line("#progress-bars");
 
-      youtube.on('response', response => {
-        const totalSize = response.headers['content-length'];
+      youtube.on("response", (response) => {
+        const totalSize = response.headers["content-length"];
         let dataRead = 0;
-        response.on('data', data => {
+        response.on("data", (data) => {
           dataRead += data.length;
           const percent = dataRead / totalSize;
-          line.animate(percent, { easing: 'easeInOut' });
+          line.animate(percent, { easing: "easeInOut" });
         });
       });
 
-      youtube.on('error', () => {
+      youtube.on("error", () => {
         reject(new Error(`There was an error while downloading ${title}`));
       });
 
-      youtube.on('end', () => {
+      youtube.on("end", () => {
         resolve({ message: `${title} finished downloading with success` });
         line.destroy();
       });
 
-      youtube.pipe(fs.createWriteStream(path.join(downloadDir, `${title}${extension}`)));
+      youtube.pipe(
+        fs.createWriteStream(path.join(downloadDir, `${title}${extension}`))
+      );
     });
   });
 };
@@ -71,8 +73,8 @@ const openFolder = () => {
 
 const setSaveFolder = () => {
   dialog
-    .showOpenDialog({ properties: ['openDirectory', 'createDirectory'] })
-    .then(result => {
+    .showOpenDialog({ properties: ["openDirectory", "createDirectory"] })
+    .then((result) => {
       if (!result.canceled) {
         [downloadDir] = result.filePaths;
       }

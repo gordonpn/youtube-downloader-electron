@@ -4,7 +4,8 @@
 ![Github license](https://badgen.net/github/license/gordonpn/youtube-downloader-electron)
 ![Electron CD](https://github.com/gordonpn/youtube-downloader-electron/workflows/Electron%20CD/badge.svg)
 ![Github last commit on develop](https://badgen.net/github/last-commit/gordonpn/youtube-downloader-electron/develop)
-![Github open issues](https://badgen.net/github/open-issues/gordonpn/youtube-downloader-electron)
+
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/gordonpn)
 
 ---
 
@@ -51,12 +52,7 @@ This project makes use of FFmpeg to convert to mp3.
 
 ## Roadmap / Todo
 
-* [x] Implement back-end logic for downloading
-* [x] Release alpha
-* [x] Add bulk download functionality
-* [x] Right click to paste functionality
-* [x] Button to open folder with downloaded content
-* [x] Separate downloaded content from Electron files
+Check out the [open issues](https://github.com/gordonpn/youtube-downloader-electron/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) for ideas and features I have planned!
 
 ## License
 
