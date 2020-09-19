@@ -1,5 +1,6 @@
 # YouTube Downloader
 
+[![Project Status: Inactive](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
 ![Github release](https://badgen.net/github/release/gordonpn/youtube-downloader-electron)
 ![Github license](https://badgen.net/github/license/gordonpn/youtube-downloader-electron)
 ![Electron CD](https://github.com/gordonpn/youtube-downloader-electron/workflows/Electron%20CD/badge.svg)
@@ -27,28 +28,28 @@ Then, I had the idea to have a try at developing a clean and straightforward UI 
 
 ## Getting started with development
 
-* Clone this repo
-* Run `npm install` in the root directory to install dependencies
-* Run `npm start` to start the development server (Electron)
+- Clone this repo
+- Run `npm install` in the root directory to install dependencies
+- Run `npm start` to start the development server (Electron)
 
 ### To build and package
 
-* Run `npm run dist`
+- Run `npm run dist`
 
 For this step, you will need have NPM and the dependencies installed.
 
 ### Prerequisites
 
-* Node.js 12+
-* [FFmpeg](https://www.ffmpeg.org/)
+- Node.js 12+
+- [FFmpeg](https://www.ffmpeg.org/)
 
 This project makes use of FFmpeg to convert to mp3.
 
 ## Built with / technologies
 
-* UIkit CSS framework
-* Electron.js
-* Node.js
+- UIkit CSS framework
+- Electron.js
+- Node.js
 
 ## Roadmap / Todo
 
